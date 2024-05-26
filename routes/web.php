@@ -3,8 +3,10 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\LoginController;
+use App\Http\Controllers\ProfilController;
 use App\Http\Controllers\BookingController;
 use App\Http\Controllers\DatakostController;
+use App\Http\Controllers\PenggunaController;
 use App\Http\Controllers\TransaksiController;
 use App\Http\Controllers\RegistrasiController;
 use App\Http\Controllers\PendaftaranController;
@@ -69,3 +71,15 @@ Route::post('/transaksi', [TransaksiController::class, 'store'])->name('transaks
 Route::get('/transaksi/{id}/edit', [TransaksiController::class, 'edit'])->name('transaksi.edit');
 Route::put('/transaksi/{id}', [TransaksiController::class, 'update'])->name('transaksi.update');
 Route::delete('/transaksi/{id}', [TransaksiController::class, 'destroy'])->name('transaksi.destroy');
+
+// PENGGUNA
+Route::get('/pengguna', [PenggunaController::class, 'index'])->name('pengguna');
+Route::get('/pengguna/create', [PenggunaController::class, 'create'])->name('create.pengguna');
+Route::post('/pengguna', [PenggunaController::class, 'store'])->name('store.pengguna');
+Route::get('/pengguna/{level}', [PenggunaController::class, 'search'])->name('cari.pengguna');
+Route::get('/pengguna/{id}/edit', [PenggunaController::class, 'edit'])->name('edit.pengguna');
+Route::put('/pengguna/{id}', [PenggunaController::class, 'update'])->name('update.pengguna');
+Route::delete('/pengguna/{id}', [PenggunaController::class, 'destroy'])->name('destroy.pengguna');
+
+//PROFIL
+Route::get('/profil', [ProfilController::class, 'index'])->name('profil');

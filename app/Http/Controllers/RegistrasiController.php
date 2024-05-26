@@ -54,7 +54,7 @@ class RegistrasiController extends Controller
         $user->level = $request->level;
         $user->save();
 
-        return redirect()->route('datakost')->with('success', 'Registrasi telah berhasil, silahkan login!');
+        return redirect()->route('login')->with('success', 'Registrasi telah berhasil, silahkan login!');
     }
 
     /**

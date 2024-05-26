@@ -2,23 +2,20 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Booking;
 use Illuminate\Http\Request;
 
-class BookingController extends Controller
+class ProfilController extends Controller
 {
     public function __construct()
     {
         $this->middleware('auth');
     }
-
     /**
      * Display a listing of the resource.
      */
     public function index()
     {
-        $booking = Booking::orderBy('id', 'desc')->paginate(10);
-        return view('web.booking.booking', compact(['booking']));
+        return view('web.profil.profil');
     }
 
     /**
@@ -67,28 +64,5 @@ class BookingController extends Controller
     public function destroy(string $id)
     {
         //
-    }
-
-    /**
-     * KONFIRMASI
-     */
-    public function konfirmasi(string $id)
-    {
-        Booking::findOrFail($id)->update([
-            'status_booking' => "Konfirmasi"
-        ]);
-
-        return redirect()->route('booking')->with('success', 'Status Booking telah di konfirmasi');
-    }
-    /**
-     * BATAL
-     */
-    public function batal(string $id)
-    {
-        Booking::findOrFail($id)->update([
-            'status_booking' => "Batal"
-        ]);
-
-        return redirect()->route('booking')->with('success', 'Status Booking telah di batalkan');
     }
 }

@@ -20,14 +20,13 @@
                 <div class="col-md-3 mt-3">
                     <div class="mb-3">
                         <select class="form-select form-select" name="cari" id="cari">
-                            <option>-- Cari Pendaftaran --</option>
+                            <option>-- Cari Pendaftar --</option>
                             <option value="pemilik_kost" {{ Request::segment(2) == 'pemilik_kost' ? 'selected' : '' }}>
                                 Pemilik</option>
                             <option value="penyewa" {{ Request::segment(2) == 'penyewa' ? 'selected' : '' }}>Pengguna
                             </option>
                         </select>
                     </div>
-
                 </div>
             </div>
             <div class="table-responsive text-nowrap">

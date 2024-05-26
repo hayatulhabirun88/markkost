@@ -135,6 +135,9 @@
                             <div class="mb-3 form-password-toggle">
                                 <div class="d-flex justify-content-between">
                                     <label class="form-label" for="password">Password</label>
+                                    <a href="/lupa-password">
+                                        <small>Lupa password?</small>
+                                    </a>
                                 </div>
                                 <div class="input-group input-group-merge">
                                     <input type="password" id="password" class="form-control" name="password"
@@ -149,9 +152,12 @@
                             <div class="mb-3">
                                 <button class="btn btn-primary d-grid w-100" type="submit">Sign in</button>
                             </div>
-                            <a href="/lupa-password">
-                                <small>Lupa password?</small>
-                            </a>
+                            <p class="text-center">
+                                <span>Belum punya akun?</span>
+                                <a href="/registrasi">
+                                    <span>Daftar</span>
+                                </a>
+                            </p>
                         </form>
                     </div>
                 </div>
