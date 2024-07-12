@@ -58,7 +58,8 @@
                             <div class="" height="300px">
                                 <div class="mb-3">
                                     @if ($pendaftaran->dok_ktp)
-                                        <img class="img-fluid" src="{{ asset('/') }}images/{{ $pendaftaran->dok_ktp }}"
+                                        <img class="img-fluid"
+                                            src="{{ asset('/') }}{{ env('ASSET_UPLOAD') }}images/{{ $pendaftaran->dok_ktp }}"
                                             alt="">
                                     @else
                                         <h1>KTP tidak di upload</h1>

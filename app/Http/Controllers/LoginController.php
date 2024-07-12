@@ -32,9 +32,8 @@ class LoginController extends Controller
             'password.required' => 'Password harus diisi'
         ]);
 
-        if (Auth::attempt($credentials)) {
+        if (Auth::attempt($credentials) && auth()->user()->level == "admin") {
             $request->session()->regenerate();
-
             return redirect()->intended('dashboard');
         }
 

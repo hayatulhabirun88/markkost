@@ -16,6 +16,16 @@ class Transaksi extends Model
         return $this->belongsTo(Booking::class);
     }
 
+    public function rekening()
+    {
+        return $this->belongsTo(Rekening::class);
+    }
+
+    public function transfer()
+    {
+        return $this->belongsTo(Transfer::class);
+    }
+
     public function user()
     {
         return $this->belongsTo(User::class);

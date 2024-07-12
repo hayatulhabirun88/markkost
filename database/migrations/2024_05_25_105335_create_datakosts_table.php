@@ -20,6 +20,8 @@ return new class extends Migration {
             $table->string('gambar');
             $table->text('maps');
             $table->text('keterangan');
+            $table->string('video')->nullable();
+            $table->bigInteger('user_id');
             $table->timestamps();
         });
     }

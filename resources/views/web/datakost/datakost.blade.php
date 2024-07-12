@@ -62,9 +62,10 @@
                                     <td>{{ $dtkost->harga }}</td>
                                     <td>{{ $dtkost->no_telp }}</td>
                                     <td>{{ $dtkost->alamat }}</td>
-                                    <td><img width="50px" src="{{ asset('/') }}gambarkost/{{ $dtkost->gambar }}"
+                                    <td><img width="50px"
+                                            src="{{ asset('/') }}{{ env('ASSET_UPLOAD') }}gambarkost/{{ $dtkost->gambar }}"
                                             alt=""></td>
-                                    <td>{{ $dtkost->maps }}</td>
+                                    <td>{{ $dtkost->maps }} </td>
                                     <td>{{ $dtkost->keterangan }}</td>
                                 </tr>
                                 <div class="modal fade" id="dokktpModal{{ $dtkost->id }}" tabindex="-1"

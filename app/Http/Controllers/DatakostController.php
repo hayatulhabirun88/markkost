@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\GambarDetailKost;
 use App\Models\User;
 use App\Models\Datakost;
 use Illuminate\Http\Request;
@@ -45,6 +46,8 @@ class DatakostController extends Controller
             "alamat" => "required",
             "keterangan" => "required",
             "gambar" => "required|image|mimes:gif,png,jpg,jpeg",
+            "gambar_detail.*" => "required|image|mimes:gif,png,jpg,jpeg",
+            "video" => "required|string",
         ]);
 
         if ($request->file('gambar')) {
@@ -54,7 +57,9 @@ class DatakostController extends Controller
             $namafile = "";
         }
 
-        Datakost::create([
+
+
+        $datakost = Datakost::create([
             "user_id" => $request->user_id,
             "nama_kost" => $request->nama_kost,
             "no_telp" => $request->no_telp,
@@ -64,7 +69,19 @@ class DatakostController extends Controller
             "alamat" => $request->alamat,
             "keterangan" => $request->keterangan,
             "gambar" => $namafile,
+            "video" => $request->video,
         ]);
+
+        if ($request->hasFile('gambar_detail')) {
+            foreach ($request->file('gambar_detail') as $gmbd) {
+                $namafile = md5($gmbd->getClientOriginalName() . time()) . '.' . $gmbd->getClientOriginalExtension();
+                $gmbd->move(public_path() . '/gambar_detail/', $namafile);
+                GambarDetailKost::create([
+                    'datakost_id' => $datakost->id,
+                    'gambar' => $namafile
+                ]);
+            }
+        }
 
         return redirect()->route('datakost')->with('success', 'Data berhasil di tambah');
     }
@@ -84,7 +101,8 @@ class DatakostController extends Controller
     {
         $nama_pemilik = User::where('level', 'pemilik_kost')->get();
         $datakost = Datakost::findOrFail($id);
-        return view('web.datakost.edit', compact(['nama_pemilik', 'datakost']));
+        $gambar_detail = GambarDetailKost::where('datakost_id', $datakost->id)->get();
+        return view('web.datakost.edit', compact(['nama_pemilik', 'datakost', 'gambar_detail']));
     }
 
     /**
@@ -104,6 +122,7 @@ class DatakostController extends Controller
             "alamat" => "required",
             "keterangan" => "required",
             "gambar" => "image|mimes:gif,png,jpg,jpeg",
+            "gambar_detail.*" => "image|mimes:gif,png,jpg,jpeg",
         ]);
 
         if ($request->file('gambar')) {
@@ -114,6 +133,27 @@ class DatakostController extends Controller
             $datakost->gambar = $namafile;
         }
 
+        // Hapus foto lama jika ada file baru yang diunggah
+        if ($request->file('gambar_detail')) {
+
+            $oldPhotos = GambarDetailKost::where('datakost_id', $datakost->id)->get();
+
+            foreach ($oldPhotos as $oldPhoto) {
+                @unlink(public_path('gambar_detail/' . $oldPhoto->gambar));
+                $oldPhoto->delete();
+            }
+
+            // Upload dan simpan gambar_detail baru
+            foreach ($request->file('gambar_detail') as $gmbrd) {
+                $namafile = md5($gmbrd->getClientOriginalName() . time()) . '.' . $gmbrd->getClientOriginalExtension();
+                $gmbrd->move(public_path('/gambar_detail/'), $namafile);
+                GambarDetailKost::create([
+                    'gambar' => $namafile,
+                    'datakost_id' => $datakost->id
+                ]);
+            }
+        }
+
         $datakost->nama_kost = $request->nama_kost;
         $datakost->no_telp = $request->no_telp;
         $datakost->harga = $request->harga;
@@ -121,6 +161,7 @@ class DatakostController extends Controller
         $datakost->maps = $request->maps;
         $datakost->alamat = $request->alamat;
         $datakost->keterangan = $request->keterangan;
+        $datakost->video = $request->video;
         $datakost->save();
 
         return redirect()->route('datakost')->with('success', 'Data berhasil di update');

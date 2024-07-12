@@ -63,6 +63,8 @@
                                         </option>
                                     @endforeach
                                 </select>
+                                @error('record')
+                                @enderror
                             </div>
                             <div class="mb-3">
                                 <label for="nama_kost" class="form-label">Nama Kost</label>
@@ -80,6 +82,11 @@
                                     placeholder="Harga" />
                             </div>
                             <div class="mb-3">
+                                <label for="video" class="form-label">Video</label>
+                                <input type="text" class="form-control" value="{{ old('video') }}" name="video"
+                                    id="video" placeholder="Contoh: https://www.youtube.com/watch?v=ldVdNgkE2Yo" />
+                            </div>
+                            <div class="mb-3">
                                 <label for="fasilitas" class="form-label">Fasilitas</label>
                                 <textarea class="form-control" name="fasilitas" value="{{ old('fasilitas') }}" id="fasilitas" rows="3"></textarea>
                             </div>
@@ -89,6 +96,11 @@
                                 <label for="gambar" class="form-label">Gambar</label>
                                 <input type="file" class="form-control" value="{{ old('gambar') }}" name="gambar"
                                     id="gambar" placeholder="Gambar" />
+                            </div>
+                            <div class="mb-3">
+                                <label for="gambar_detail" class="form-label">Gambar Detail</label>
+                                <input type="file" class="form-control" value="{{ old('gambar_detail') }}"
+                                    name="gambar_detail[]" id="gambar_detail[]" placeholder="Gambar Detail" multiple />
                             </div>
                             <div class="mb-3">
                                 <label for="maps" class="form-label">Titik Koordinat <span class="badge bg-danger">

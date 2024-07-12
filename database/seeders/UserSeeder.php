@@ -18,8 +18,7 @@ class UserSeeder extends Seeder
             'name' => 'admin',
             'email' => 'admin@gmail.com',
             'password' => Hash::make('admin'),
-            'np_tlp' => '081212341234',
-            'no_ktp' => '123456789987654321',
+            'no_tlp' => '081212341234',
             'dok_ktp' => '',
             'level' => 'admin',
         ];

@@ -42,6 +42,8 @@
                                     </option>
                                     <option value="penyewa" {{ $user->level == 'penyewa' ? 'selected' : '' }}>Penyewa
                                     </option>
+                                    <option value="admin" {{ $user->level == 'admin' ? 'selected' : '' }}>Admin
+                                    </option>
                                 </select>
                             </div>
                             <div class="mb-3">
@@ -56,7 +58,8 @@
                             <div class="" height="300px">
                                 <div class="mb-3">
                                     @if ($user->dok_ktp)
-                                        <img class="img-fluid" src="{{ asset('/') }}images/{{ $user->dok_ktp }}"
+                                        <img class="img-fluid"
+                                            src="{{ asset('/') }}{{ env('ASSET_UPLOAD') }}images/{{ $user->dok_ktp }}"
                                             alt="">
                                     @else
                                         <h1>KTP tidak di upload</h1>

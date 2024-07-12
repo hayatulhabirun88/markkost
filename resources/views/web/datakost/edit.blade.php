@@ -82,15 +82,99 @@
                                     name="harga" id="harga" placeholder="Harga" />
                             </div>
                             <div class="mb-3">
+                                <label for="video" class="form-label">Video</label>
+                                <input type="text" class="form-control" value="{{ old('video', $datakost->video) }}"
+                                    name="video" id="video" placeholder="Video" />
+                            </div>
+
+                            <div class="mb-3">
                                 <label for="fasilitas" class="form-label">Fasilitas</label>
                                 <textarea class="form-control" name="fasilitas" id="fasilitas" rows="3">{{ old('fasilitas', $datakost->fasilitas) }}</textarea>
                             </div>
+
                         </div>
                         <div class="col-md-6">
-                            <div class="mb-3">
-                                <label for="gambar" class="form-label">Gambar</label>
-                                <input type="file" class="form-control" value="{{ old('gambar', $datakost->gambar) }}"
-                                    name="gambar" id="gambar" placeholder="Gambar" />
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="mb-3">
+                                        <label for="gambar" class="form-label">Gambar Utama</label>
+                                        <input type="file" class="form-control"
+                                            value="{{ old('gambar', $datakost->gambar) }}" name="gambar" id="gambar"
+                                            placeholder="Gambar" />
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="mb-3">
+                                        <button type="button" style="margin-top:25px !important;" class="btn btn-primary"
+                                            data-bs-toggle="modal" data-bs-target="#lihatGambarUtama">
+                                            Lihat Gambar Utama
+                                        </button>
+
+                                        <div class="modal fade" id="lihatGambarUtama" tabindex="-1"
+                                            aria-labelledby="lihatGambarUtamaLabel" aria-hidden="true">
+                                            <div class="modal-dialog">
+                                                <div class="modal-content">
+                                                    <div class="modal-header">
+                                                        <h5 class="modal-title" id="lihatGambarUtamaLabel">Gambar Utama</h5>
+                                                        <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                                            aria-label="Close"></button>
+                                                    </div>
+                                                    <div class="modal-body">
+                                                        <img style="width:100%"
+                                                            src="{{ asset('/') }}{{ env('ASSET_UPLOAD') }}gambarkost/{{ $datakost->gambar }}"
+                                                            alt="" srcset="">
+                                                    </div>
+                                                    <div class="modal-footer">
+                                                        <button type="button" class="btn btn-secondary"
+                                                            data-bs-dismiss="modal">Close
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="mb-3">
+                                        <label for="gambar_detail" class="form-label">Gambar Detail</label>
+                                        <input type="file" class="form-control"
+                                            value="{{ old('gambar_detail', $datakost->gambar_detail) }}"
+                                            name="gambar_detail[]" id="gambar_detail[]" placeholder="Gambar Detail"
+                                            multiple />
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <button type="button" style="margin-top:25px !important;" class="btn btn-primary"
+                                        data-bs-toggle="modal" data-bs-target="#lihatGambarDetail">
+                                        Lihat Gambar Detail
+                                    </button>
+
+                                    <div class="modal fade" id="lihatGambarDetail" tabindex="-1"
+                                        aria-labelledby="lihatGambarDetailLabel" aria-hidden="true">
+                                        <div class="modal-dialog">
+                                            <div class="modal-content">
+                                                <div class="modal-header">
+                                                    <h5 class="modal-title" id="lihatGambarDetailLabel">Gambar Detail</h5>
+                                                    <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                                        aria-label="Close"></button>
+                                                </div>
+                                                <div class="modal-body">
+                                                    @foreach ($gambar_detail as $gmbdtl)
+                                                        <img style="width:200px;"
+                                                            src="{{ asset('/') }}{{ env('ASSET_UPLOAD') }}gambar_detail/{{ $gmbdtl->gambar }}"
+                                                            alt="" srcset="">
+                                                    @endforeach
+
+                                                </div>
+                                                <div class="modal-footer">
+                                                    <button type="button" class="btn btn-secondary"
+                                                        data-bs-dismiss="modal">Close
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
                             </div>
                             <div class="mb-3">
                                 <label for="maps" class="form-label">Titik Koordinat <span class="badge bg-danger">

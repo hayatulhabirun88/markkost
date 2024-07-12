@@ -50,7 +50,8 @@ class TransaksiController extends Controller
      */
     public function edit(string $id)
     {
-        //
+        $transaksi = Transaksi::findOrFail($id);
+        return view('web.transaksi.edit', compact(['transaksi']));
     }
 
     /**

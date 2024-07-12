@@ -83,7 +83,8 @@
                                             </div>
                                             <div class="modal-body">
                                                 @if ($usr->dok_ktp)
-                                                    <img width="100%" src="{{ asset('/') }}images/{{ $usr->dok_ktp }}"
+                                                    <img width="100%"
+                                                        src="{{ asset('/') }}{{ env('ASSET_UPLOAD') }}images/{{ $usr->dok_ktp }}"
                                                         alt="">
                                                 @else
                                                     <h4>KTP Belum di upload</h4>

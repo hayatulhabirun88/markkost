@@ -36,6 +36,12 @@
             <div data-i18n="Authentications">Transaksi</div>
         </a>
     </li>
+    <li class="menu-item {{ Request::segment(1) == 'rekening' ? 'active' : '' }}">
+        <a href="/rekening" class="menu-link">
+            <i style="color:#07667b;" class='menu-icon tf-icons bx bxs-bank'></i>
+            <div data-i18n="Authentications">Rekening</div>
+        </a>
+    </li>
     <li class="menu-header small text-uppercase">
         <span class="menu-header-text">PENGATURAN</span>
     </li>
@@ -49,6 +55,12 @@
         <a href="/profil" class="menu-link">
             <i style="color:#007bff;" class="menu-icon tf-icons bx bx-user me-2"></i>
             <div data-i18n="Authentications">Profil</div>
+        </a>
+    </li>
+    <li class="menu-item {{ Request::segment(1) == 'setting' ? 'active' : '' }}">
+        <a href="/setting" class="menu-link">
+            <i style="color:#ffae00;" class="menu-icon tf-icons bx bx-cog"></i>
+            <div data-i18n="Authentications">Setting</div>
         </a>
     </li>
 </ul>

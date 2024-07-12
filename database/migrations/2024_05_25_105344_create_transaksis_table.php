@@ -14,10 +14,13 @@ return new class extends Migration {
             $table->id();
             $table->bigInteger('booking_id');
             $table->bigInteger('user_id');
+            $table->bigInteger('rekening_id')->nullable();
+            $table->bigInteger('transfer_id')->nullable();
             $table->date('tgl_kirim');
             $table->date('tgl_terima');
             $table->text('keterangan');
             $table->bigInteger('total');
+            $table->string('status_pembayaran');
             $table->timestamps();
         });
     }

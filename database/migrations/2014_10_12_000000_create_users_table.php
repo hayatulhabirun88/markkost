@@ -14,8 +14,7 @@ return new class extends Migration {
             $table->id();
             $table->string('name');
             $table->string('email')->unique();
-            $table->string('np_tlp');
-            $table->string('no_ktp')->nullable();
+            $table->string('no_tlp');
             $table->string('dok_ktp')->nullable();
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password');

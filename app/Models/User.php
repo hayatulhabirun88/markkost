@@ -21,6 +21,9 @@ class User extends Authenticatable
         'name',
         'email',
         'password',
+        'no_tlp',
+        'level',
+        'dok_ktp'
     ];
 
     /**

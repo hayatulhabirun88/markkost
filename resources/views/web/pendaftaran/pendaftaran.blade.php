@@ -85,7 +85,7 @@
                                             <div class="modal-body">
                                                 @if ($pend->dok_ktp)
                                                     <img width="100%"
-                                                        src="{{ asset('/') }}images/{{ $pend->dok_ktp }}"
+                                                        src="{{ asset('/') }}{{ env('ASSET_UPLOAD') }}images/{{ $pend->dok_ktp }}"
                                                         alt="">
                                                 @else
                                                     <h4>KTP Belum di upload</h4>

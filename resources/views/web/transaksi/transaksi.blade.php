@@ -35,6 +35,7 @@
                             <th>Nama Pemilik</th>
                             <th>Tanggal Kirim</th>
                             <th>Tanggal Terima</th>
+                            <th>Status Pembayaran</th>
                             <th>Keterangan</th>
                             <th>Total</th>
                             <th>Aksi</th>
@@ -49,9 +50,10 @@
                                     <td>{{ $trans->booking->datakost->user->name }}</td>
                                     <td>{{ $trans->tgl_kirim }}</td>
                                     <td>{{ $trans->tgl_terima }}</td>
-                                    <td>{{ $trans->keterangan }}</td>
+                                    <td>{{ $trans->status_pembayaran }}</td>
+                                    <td>{{ @$trans->keterangan }}</td>
                                     <td>{{ $trans->total }}</td>
-                                    <td><a href="/transaksit/{{ $trans->id }}/edit" class="btn btn-sm btn-info"><i
+                                    <td><a href="/transaksi/{{ $trans->id }}/edit" class="btn btn-sm btn-info"><i
                                                 class='bx bx-list-ul'></i></a>
                                     </td>
                                 </tr>
