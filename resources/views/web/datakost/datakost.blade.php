@@ -56,12 +56,12 @@
                                             <i class='bx bx-trash'></i>
                                         </button>
                                     </td>
-                                    <td>{{ $dtkost->user->name }}</td>
-                                    <td>{{ $dtkost->nama_kost }}</td>
-                                    <td>{{ $dtkost->fasilitas }}</td>
-                                    <td>{{ $dtkost->harga }}</td>
-                                    <td>{{ $dtkost->no_telp }}</td>
-                                    <td>{{ $dtkost->alamat }}</td>
+                                    <td>{{ @$dtkost->user->name }}</td>
+                                    <td>{{ @$dtkost->nama_kost }}</td>
+                                    <td>{{ @$dtkost->fasilitas }}</td>
+                                    <td>{{ @$dtkost->harga }}</td>
+                                    <td>{{ @$dtkost->no_telp }}</td>
+                                    <td>{{ @$dtkost->alamat }}</td>
                                     <td><img width="50px"
                                             src="{{ asset('/') }}{{ env('ASSET_UPLOAD') }}gambarkost/{{ $dtkost->gambar }}"
                                             alt=""></td>

@@ -55,7 +55,7 @@
                         <div class="col-md-6">
                             <div class="mb-3">
                                 <label for="nama_pemilik" class="form-label">Nama Pemilik</label>
-                                <select class="form-select form-select" name="user_id" id="nama_pemilik">
+                                <select class="form-select form-select" name="nama_pemilik" id="nama_pemilik">
                                     <option value="" selected>-- Pilih Nama Pemilik --</option>
                                     @foreach ($nama_pemilik as $nmpemilik)
                                         <option value="{{ $nmpemilik->id }}"

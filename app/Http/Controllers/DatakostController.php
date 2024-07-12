@@ -113,7 +113,7 @@ class DatakostController extends Controller
         $datakost = Datakost::findOrFail($id);
 
         $request->validate([
-            "user_id" => "required|numeric",
+            "nama_pemilik" => "required|numeric",
             "nama_kost" => "required",
             "no_telp" => "required",
             "harga" => "required|numeric",
@@ -153,7 +153,7 @@ class DatakostController extends Controller
                 ]);
             }
         }
-
+        $datakost->user_id = $request->nama_pemilik;
         $datakost->nama_kost = $request->nama_kost;
         $datakost->no_telp = $request->no_telp;
         $datakost->harga = $request->harga;
