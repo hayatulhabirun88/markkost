@@ -78,6 +78,7 @@ Route::post('/transaksi', [TransaksiController::class, 'store'])->name('transaks
 Route::get('/transaksi/{id}/edit', [TransaksiController::class, 'edit'])->name('transaksi.edit');
 Route::put('/transaksi/{id}', [TransaksiController::class, 'update'])->name('transaksi.update');
 Route::delete('/transaksi/{id}', [TransaksiController::class, 'destroy'])->name('transaksi.destroy');
+Route::get('/transaksi/cetak', [TransaksiController::class, 'cetak_pdf'])->name('cetak.transaksi');
 
 // REKENING
 Route::get('/rekening', [RekeningController::class, 'index'])->name('rekening');
@@ -102,6 +103,8 @@ Route::put('/setting/update/{id}', [SettingController::class, 'update'])->name('
 
 //PROFIL
 Route::get('/profil', [ProfilController::class, 'index'])->name('profil');
+Route::put('/profil/{id}', [ProfilController::class, 'update'])->name('profil.update');
+Route::post('/profil/ajax', [ProfilController::class, 'ajax_avatar'])->name('ajax.upload.profil');
 
 
 // TAMPILAN MOBILE

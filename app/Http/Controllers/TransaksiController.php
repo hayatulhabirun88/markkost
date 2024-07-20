@@ -69,4 +69,15 @@ class TransaksiController extends Controller
     {
         //
     }
+
+    public function cetak_pdf()
+    {
+        if (auth()->user()->level == 'penyewa') {
+            return redirect()->back();
+        }
+
+        $transaksi = Transaksi::all();
+
+        return view('web.transaksi.transaksi_pdf', compact(['transaksi']));
+    }
 }

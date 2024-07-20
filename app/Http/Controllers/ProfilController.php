@@ -2,7 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class ProfilController extends Controller
 {
@@ -55,7 +57,22 @@ class ProfilController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        //
+        $request->validate([
+            'name' => 'string|max:255',
+            'email' => 'email|max:255|unique:users,email,' . $id,
+            'no_tlp' => 'string|max:15',
+        ]);
+
+        $user = User::findOrFail($id);
+
+        $user->name = $request->input('name');
+        $user->email = $request->input('email');
+        $user->no_tlp = $request->input('no_tlp');
+        $user->save();
+
+        return redirect()->back()->with('success', 'Profil berhasil diubah');
+
+
     }
 
     /**
@@ -64,5 +81,27 @@ class ProfilController extends Controller
     public function destroy(string $id)
     {
         //
+    }
+
+    public function ajax_avatar(Request $request)
+    {
+        $request->validate([
+            'upload' => 'image|mimes:jpg,jpeg,png,gif'
+        ]);
+
+        $profil = Auth::user();
+
+        if ($request->file('upload')) {
+            @unlink(public_path() . '/images/profil/' . $profil->avatar);
+            $namafile = md5($request->file('upload')->getClientOriginalName() . time()) . '.' . $request->file('upload')->getClientOriginalExtension();
+            $request->file('upload')->move(public_path() . '/images/profil/', $namafile);
+            $profil->avatar = $namafile;
+        }
+
+        $profil->update();
+
+        return response()->json(['success' => 'Profil berhasil diubah', 'avatar' => $profil->avatar]);
+
+
     }
 }

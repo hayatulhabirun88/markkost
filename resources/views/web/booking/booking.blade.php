@@ -40,8 +40,8 @@
                                 <tr>
                                     <td>BK-{{ $bk->id }}</td>
 
-                                    <td>{{ $bk->user->name }}</td>
-                                    <td>{{ $bk->datakost->nama_kost }}</td>
+                                    <td>{{ @$bk->user->name }}</td>
+                                    <td>{{ @$bk->datakost->nama_kost }}</td>
                                     <td>
                                         @if ($bk->status_booking == 'Dipesan')
                                             <span class="badge bg-secondary">{{ $bk->status_booking }}</span>

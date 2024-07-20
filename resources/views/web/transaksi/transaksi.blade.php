@@ -11,7 +11,7 @@
                 <h4 class="fw-bold py-3 mb-4"><span class="text-muted fw-light">Halaman /</span> Transaksi</h4>
             </div>
             <div class="col-md-3 d-flex justify-content-end align-items-center">
-                <a href="/transaksi/cetak" class="btn btn-primary">Cetak</a>
+                <a target="_blank" href="/transaksi/cetak" class="btn btn-primary">Cetak</a>
             </div>
         </div>
 
@@ -46,13 +46,13 @@
                             @foreach ($transaksi as $index => $trans)
                                 <tr>
                                     <td>BK-{{ $trans->booking->id }}</td>
-                                    <td>{{ $trans->booking->user->name }}</td>
-                                    <td>{{ $trans->booking->datakost->user->name }}</td>
-                                    <td>{{ $trans->tgl_kirim }}</td>
-                                    <td>{{ $trans->tgl_terima }}</td>
-                                    <td>{{ $trans->status_pembayaran }}</td>
+                                    <td>{{ @$trans->booking->user->name }}</td>
+                                    <td>{{ @$trans->booking->datakost->user->name }}</td>
+                                    <td>{{ @$trans->tgl_kirim }}</td>
+                                    <td>{{ @$trans->tgl_terima }}</td>
+                                    <td>{{ @$trans->status_pembayaran }}</td>
                                     <td>{{ @$trans->keterangan }}</td>
-                                    <td>{{ $trans->total }}</td>
+                                    <td>{{ @$trans->total }}</td>
                                     <td><a href="/transaksi/{{ $trans->id }}/edit" class="btn btn-sm btn-info"><i
                                                 class='bx bx-list-ul'></i></a>
                                     </td>

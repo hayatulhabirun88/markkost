@@ -19,19 +19,39 @@
                     <!-- Account -->
                     <div class="card-body">
                         <div class="d-flex align-items-start align-items-sm-center gap-4">
-                            <img src="{{ asset('/') }}backend/assets/img/avatars/1.png" alt="user-avatar"
-                                class="d-block rounded" height="100" width="100" id="uploadedAvatar">
+                            <img src="{{ asset('/') }}{{ env('ASSET_UPLOAD') }}images/profil/{{ auth()->user()->avatar }}"
+                                alt="user-avatar" class="d-block rounded" height="100" width="100"
+                                id="uploadedAvatar"><br><br>
+
+
+                            <form id="uploadForm" enctype="multipart/form-data">
+                                <div class="button-wrapper">
+                                    <label for="upload" class="btn btn-primary me-2 mb-4" tabindex="0">
+                                        <span class="d-none d-sm-block">Ganti Foto</span>
+                                        <i class="bx bx-upload d-block d-sm-none"></i>
+                                        <input type="file" id="upload" name="upload" class="account-file-input"
+                                            hidden="" accept="image/png, image/jpeg">
+
+                                    </label>
+                                    <div id="status"></div>
+                                </div>
+                            </form>
+
                         </div>
                     </div>
                     <hr class="my-0">
                     <div class="card-body">
-                        <form method="POST" onsubmit="return false">
+                        <form method="POST" action="{{ route('profil.update', auth()->user()->id) }}"
+                            enctype="multipart/form-data">
+                            @csrf
+                            @method('PUT')
                             <div class="row">
                                 <div class="mb-3 col-md-6">
                                     <label for="name" class="form-label">Nama</label>
                                     <input class="form-control" type="text"
                                         value="{{ old('name', auth()->user()->name) }}" id="name" name="name"
                                         value="John" autofocus="">
+
                                 </div>
                                 <div class="mb-3 col-md-6">
                                     <label for="email" class="form-label">E-mail</label>
@@ -46,17 +66,7 @@
                                 </div>
                                 <div class="mb-3 col-md-6">
                                     <label for="level" class="form-label">Level</label>
-                                    <select class="form-select form-select" name="level" id="level">
-                                        <option selected>Pilih Level</option>
-                                        <option value="pemilik_kost"
-                                            {{ old('level', auth()->user()->level) == 'pemilik_kost' ? 'selected' : '' }}>
-                                            Pemilik Kost</option>
-                                        <option value="penyewa"
-                                            {{ old('level', auth()->user()->level) == 'penyewa' ? 'selected' : '' }}>Penyewa
-                                        <option value="admin"
-                                            {{ old('level', auth()->user()->level) == 'admin' ? 'selected' : '' }}>Admin
-                                        </option>
-                                    </select>
+                                    <input type="text" class="form-control" value="{{ auth()->user()->level }}" readonly>
                                 </div>
 
                             </div>
@@ -71,3 +81,34 @@
         </div>
     </div>
 @endsection
+
+@push('script')
+    <script>
+        $(document).ready(function() {
+            $('#uploadForm').on('change', function(e) {
+                e.preventDefault();
+
+                var formData = new FormData(this);
+
+                formData.append('_token', '{{ csrf_token() }}');
+
+                $.ajax({
+                    url: `{{ route('ajax.upload.profil') }}`, // Gunakan route Laravel
+                    type: 'POST',
+                    data: formData,
+                    contentType: false,
+                    processData: false,
+                    success: function(response) {
+                        $('#uploadedAvatar').attr('src',
+                                `{{ env('ASSET_UPLOAD') }}/images/profil/` + response.avatar)
+                            .show();
+                    },
+                    error: function(xhr) {
+                        $('#status').html('<p>Terjadi kesalahan saat upload foto.</p>');
+                        console.error(xhr.responseText);
+                    }
+                });
+            });
+        });
+    </script>
+@endpush
