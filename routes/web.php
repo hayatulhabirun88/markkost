@@ -110,6 +110,8 @@ Route::post('/profil/ajax', [ProfilController::class, 'ajax_avatar'])->name('aja
 // TAMPILAN MOBILE
 Route::get('/mobile/login', [LoginMobileController::class, 'index'])->name('mobile.login');
 Route::post('/mobile/login', [LoginMobileController::class, 'proses'])->name('mobile.proses.login');
+Route::get('/mobile/otp-login', [LoginMobileController::class, 'otp_login'])->name('proses.login.otp');
+Route::post('/mobile/proses-otp-login', [LoginMobileController::class, 'proses_otp_login'])->name('mobile.login.otp');
 Route::get('/mobile/logout', [LoginMobileController::class, 'logout'])->name('mobile.logout');
 
 Route::get('/mobile/index', function () {

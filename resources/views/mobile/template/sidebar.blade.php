@@ -1,10 +1,13 @@
 <ul>
-    <li>
-        <a href="/mobile/logout">
-            <i class="mdi mdi-logout"></i>
-            <span>Keluar</span>
-        </a>
-    </li>
+    @if (Auth::check())
+        <li>
+            <a href="/mobile/logout">
+                <i class="mdi mdi-logout"></i>
+                <span> Keluar</span>
+            </a>
+        </li>
+    @endif
+
     <li>
         <a href="/mobile/dashboard">
             <i class="mdi mdi-home"></i>

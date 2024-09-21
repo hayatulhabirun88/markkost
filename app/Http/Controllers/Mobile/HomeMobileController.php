@@ -23,11 +23,21 @@ class HomeMobileController extends Controller
 
     public function cari(Request $request)
     {
+        $datakost = Datakost::query();
+
+        // Pencarian menggunakan input 'cari_kost' di nama_kost, alamat, dan harga
         if ($request->input('cari_kost')) {
-            $datakost = Datakost::where('nama_kost', 'like', '%' . $request->input('cari_kost') . '%')->paginate(10);
-        } else {
-            $datakost = Datakost::paginate(10);
+            $cariKost = $request->input('cari_kost');
+
+            $datakost->where(function ($query) use ($cariKost) {
+                $query->where('nama_kost', 'like', '%' . $cariKost . '%')
+                    ->orWhere('alamat', 'like', '%' . $cariKost . '%')
+                    ->orWhere('harga', 'like', '%' . $cariKost . '%'); // 'harga' ini akan mencari berdasarkan harga yang mengandung string tertentu
+            });
         }
+
+        // Paginate hasil pencarian
+        $datakost = $datakost->paginate(10);
         return view('mobile.home.cari', compact(['datakost']));
     }
 

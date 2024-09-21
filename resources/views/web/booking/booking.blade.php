@@ -1,14 +1,14 @@
 @extends('web.template.content')
 
 @section('title')
-    Data Kost
+    Booking Kost
 @endsection
 
 @section('content')
     <div class="container-xxl flex-grow-1 container-p-y">
         <div class="row">
             <div class="col-md-9 d-flex align-items-center">
-                <h4 class="fw-bold py-3 mb-4"><span class="text-muted fw-light">Halaman /</span> Data Kost</h4>
+                <h4 class="fw-bold py-3 mb-4"><span class="text-muted fw-light">Halaman /</span> Booking Kost</h4>
             </div>
         </div>
 
@@ -20,7 +20,7 @@
         <div class="card">
             <div class="row">
                 <div class="col-md-9">
-                    <h5 class="card-header">Data Kost</h5>
+                    <h5 class="card-header">Booking Kost</h5>
                 </div>
             </div>
             <div class="table-responsive text-nowrap">

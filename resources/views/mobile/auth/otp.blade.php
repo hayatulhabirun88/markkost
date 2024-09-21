@@ -5,7 +5,7 @@
 
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>Booking | Mark Kost</title>
+    <title>OTP | Mark Kost</title>
     <meta content="Mark Kost Mobile App" name="description" />
     <meta content="themepassion" name="author" />
 
@@ -213,70 +213,67 @@
 
         <div class="container has-pagehead is-pagetitle">
             <div class="section">
-                <h5 class="pagetitle">BOOKING {{ $datakost->nama_kost }}</h5>
+                <h5 class="pagetitle">OTP </h5>
             </div>
         </div>
         <div class="container over">
             <div class="section">
                 <div class="row ">
                     <div class="col s12 pad-0">
-                        <h5 class="bot-20 sec-tit  ">Pembayaran</h5>
-                        <form action="{{ route('mobile.store') }}" method="POST">
+                        <h5 class="bot-20 sec-tit  ">OTP</h5>
+                        <form action="{{ route('mobile.login.otp') }}" method="POST">
                             @csrf
                             <div class="card gray darken-1">
                                 <div class="card-content">
-                                    <input type="hidden" name="datakost_id" value="{{ Request::segment(3) }}">
-                                    <div>
-                                        <div class="mb-3">
-                                            <label for="" class="form-label">Nama Pengirim</label>
-                                            <input type="text" name="nama_pengirim" placeholder="Nama Pengirim"
-                                                class="form-control">
-                                        </div>
-                                        <div class="mb-3">
-                                            <label for="nama_bank_tujuan" class="form-label">Nama Bank Tujuan</label>
-                                            <select class="form-control" name="nama_bank_tujuan"
-                                                id="nama_bank_tujuan">
-                                                <option value="">Pilih Rekening Tujuan</option>
-                                                @php
-                                                    $rekening = \App\Models\Rekening::where(
-                                                        'user_id',
-                                                        $datakost->user_id,
-                                                    )->get();
-                                                @endphp
-                                                @foreach ($rekening as $rek)
-                                                    <option value="{{ $rek->id }}">{{ $rek->nama_bank }}
-                                                    </option>
-                                                @endforeach
-                                            </select>
-                                        </div>
-                                        <div class="mb-3">
-                                            <label for="nama_rekening" class="form-label">Nama Rekening Tujuan</label>
-                                            <input type="text" name="nama_rekening"
-                                                placeholder="Nama Rekening Tujuan" class="form-control"
-                                                id="nama_rekening" readonly>
-                                        </div>
-                                        <div class="mb-3">
-                                            <label for="nomor_rekening" class="form-label">Nomor Rekening
-                                                Tujuan</label>
-                                            <input type="text" name="nomor_rekening"
-                                                placeholder="Nomor Rekening Tujuan" class="form-control"
-                                                id="nomor_rekening" readonly>
-                                        </div>
-                                    </div>
 
                                     <div class="mb-3">
-                                        <label for="nominal" class="form-label">Nominal Pembayaran</label>
-                                        <input type="text" name="nominal" placeholder="Nominal Pembayaran"
-                                            value="{{ number_format($datakost->harga) }}" class="form-control"
-                                            id="nominal" readonly>
+                                        <label for="otpcode" class="form-label">Masukan Kode OTP dari Email</label>
+
+                                        <div class="input-wrapper d-flex justify-content-between">
+                                            <input type="hidden" id="otpcode" name="otpcode">
+
+                                            <input id="codeBox1" type="tel" maxlength="1"
+                                                onkeyup="onKeyUpEvent(1, event)" onfocus="onFocusEvent(1)"
+                                                class="form-control verify-input" placeholder="_"
+                                                style="color: #495057 !important; height: 45px !important; width: 45px;">
+                                            <input id="codeBox2" type="tel" maxlength="1"
+                                                onkeyup="onKeyUpEvent(2, event)" onfocus="onFocusEvent(2)"
+                                                class="form-control verify-input" placeholder="_"
+                                                style="color: #495057 !important; height: 45px !important; width: 45px;">
+                                            <input id="codeBox3" type="tel" maxlength="1"
+                                                onkeyup="onKeyUpEvent(3, event)" onfocus="onFocusEvent(3)"
+                                                class="form-control verify-input" placeholder="_"
+                                                style="color: #495057 !important; height: 45px !important; width: 45px;">
+                                            <input id="codeBox4" type="tel" maxlength="1"
+                                                onkeyup="onKeyUpEvent(4, event)" onfocus="onFocusEvent(4)"
+                                                class="form-control verify-input" placeholder="_"
+                                                style="color: #495057 !important; height: 45px !important; width: 45px;">
+                                            <input id="codeBox5" type="tel" maxlength="1"
+                                                onkeyup="onKeyUpEvent(5, event)" onfocus="onFocusEvent(5)"
+                                                class="form-control verify-input" placeholder="_"
+                                                style="color: #495057 !important; height: 45px !important; width: 45px;">
+                                            <input id="codeBox6" type="tel" maxlength="1"
+                                                onkeyup="onKeyUpEvent(6, event)" onfocus="onFocusEvent(6)"
+                                                class="form-control verify-input" placeholder="_"
+                                                style="color: #495057 !important; height: 45px !important; width: 45px;">
+                                        </div><br><br>
+                                        <div id="countdown" style="font-size: 15px; font-weight: bold;"></div>
+                                        <button id="resendBtn" type="button" class="btn btn-secondary" disabled
+                                            onclick="resendOtp()" style="display: none;">
+                                            Kirim Ulang OTP
+                                        </button>
+
+                                        @error('otpcode')
+                                            <span class="text-danger" style="color:red;">{{ $message }}</span>
+                                        @enderror
                                     </div>
+
                                 </div>
                                 <div class="card-action">
-                                    <input type="submit" value="Booking" class="btn btn-primary">
+                                    <input type="submit" value="Konfirmasi" class="btn btn-primary">
                                 </div>
                             </div>
                         </form>
-
 
                     </div>
                 </div>
@@ -343,6 +340,78 @@
 
     </div>
 
+
+    <script>
+        function onKeyUpEvent(index, event) {
+            const value = event.target.value;
+            if (value.length === 1 && index < 6) {
+                document.getElementById(`codeBox${index + 1}`).focus();
+            }
+            updateOtpValue();
+        }
+
+        function onFocusEvent(index) {
+            for (let i = 1; i < index; i++) {
+                const currentElement = document.getElementById(`codeBox${i}`);
+                if (!currentElement.value) {
+                    currentElement.focus();
+                    break;
+                }
+            }
+        }
+
+        function updateOtpValue() {
+            let otpValue = '';
+            for (let i = 1; i <= 6; i++) {
+                otpValue += document.getElementById(`codeBox${i}`).value;
+            }
+            document.getElementById('otpcode').value = otpValue;
+        }
+    </script>
+
+    <script>
+        // Hitungan mundur selama 30 detik
+        let countdownTime = 30;
+        const countdownElement = document.getElementById('countdown');
+        const resendBtn = document.getElementById('resendBtn');
+
+        const countdownTimer = setInterval(function() {
+            countdownElement.innerHTML = `Kirim ulang kode dalam ${countdownTime} detik`;
+
+            if (countdownTime === 0) {
+                clearInterval(countdownTimer);
+                countdownElement.innerHTML = "Anda dapat mengirim ulang kode.";
+                resendBtn.style.display = 'block'; // Tampilkan tombol resend OTP
+                resendBtn.disabled = false; // Aktifkan tombol
+            }
+
+            countdownTime--;
+        }, 1000);
+
+        // Fungsi untuk mengirim ulang OTP
+        function resendOtp() {
+            // Lakukan aksi untuk mengirim ulang OTP melalui AJAX atau form submission
+            alert('Kode OTP telah dikirim ulang!');
+            resendBtn.disabled = true; // Nonaktifkan tombol setelah diklik
+            resendBtn.style.display = 'none'; // Sembunyikan tombol
+            countdownTime = 30; // Set ulang hitungan mundur
+            countdownElement.innerHTML = `Kirim ulang kode dalam ${countdownTime} detik`;
+
+            const countdownTimer = setInterval(function() {
+                countdownElement.innerHTML = `Kirim ulang kode dalam ${countdownTime} detik`;
+
+                if (countdownTime === 0) {
+                    clearInterval(countdownTimer);
+                    countdownElement.innerHTML = "Anda dapat mengirim ulang kode.";
+                    resendBtn.style.display = 'block'; // Tampilkan tombol resend OTP lagi
+                    resendBtn.disabled = false; // Aktifkan tombol
+                }
+
+                countdownTime--;
+            }, 1000);
+        }
+    </script>
+
     <script src="{{ asset('/') }}mobile/assets/js/pwa.js"></script>
 
     <!-- LOAD FILES AT PAGE END FOR FASTER LOADING -->
@@ -373,39 +442,6 @@
 
     <script src="{{ asset('/') }}mobile/assets/js/preloader.js"></script>
 
-    <script>
-        $(document).ready(function() {
-
-            $("#jenis_pembayaran").change(function() {
-                $("#transfer").toggle($("#jenis_pembayaran").val() === "transfer");
-            });
-
-            $("#nama_bank_tujuan").change(function() {
-                $.ajax({
-                    type: "POST",
-                    url: "/mobile/booking/getajax",
-                    dataType: "json",
-                    data: {
-                        _token: '{{ csrf_token() }}',
-                        rekening_id: $(this).val()
-                    },
-                    success: function(response) {
-                        if (response.message === "success") {
-                            $("#nama_rekening").val(response.data.nama_rekening);
-                            $("#nomor_rekening").val(response.data.nomor_rekening);
-                        } else {
-                            alert('Rekening Tidak Valid');
-                        }
-                    },
-                    error: function() {
-                        $("#nama_rekening").val("");
-                        $("#nomor_rekening").val("");
-                    }
-                });
-            });
-
-        });
-    </script>
 </body>
 
 </html>
