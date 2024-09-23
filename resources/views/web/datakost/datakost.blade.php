@@ -35,7 +35,10 @@
                             <th>Nama Pemilik</th>
                             <th>Nama Kost</th>
                             <th>Fasilitas</th>
-                            <th>Harga</th>
+                            <th>Harian</th>
+                            <th>Mingguan</th>
+                            <th>Bulanan</th>
+                            <th>Tahunan</th>
                             <th>No Telepon</th>
                             <th>Alamat</th>
                             <th>Gambar</th>
@@ -59,7 +62,10 @@
                                     <td>{{ @$dtkost->user->name }}</td>
                                     <td>{{ @$dtkost->nama_kost }}</td>
                                     <td>{{ @$dtkost->fasilitas }}</td>
-                                    <td>{{ @$dtkost->harga }}</td>
+                                    <td>{{ @$dtkost->harga_harian }}</td>
+                                    <td>{{ @$dtkost->harga_mingguan }}</td>
+                                    <td>{{ @$dtkost->harga_bulanan }}</td>
+                                    <td>{{ @$dtkost->harga_tahunan }}</td>
                                     <td>{{ @$dtkost->no_telp }}</td>
                                     <td>{{ @$dtkost->alamat }}</td>
                                     <td><img width="50px"

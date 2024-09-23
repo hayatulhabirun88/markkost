@@ -32,7 +32,11 @@ class HomeMobileController extends Controller
             $datakost->where(function ($query) use ($cariKost) {
                 $query->where('nama_kost', 'like', '%' . $cariKost . '%')
                     ->orWhere('alamat', 'like', '%' . $cariKost . '%')
-                    ->orWhere('harga', 'like', '%' . $cariKost . '%'); // 'harga' ini akan mencari berdasarkan harga yang mengandung string tertentu
+                    ->orWhere('harga_harian', 'like', '%' . $cariKost . '%')
+                    ->orWhere('harga_mingguan', 'like', '%' . $cariKost . '%')
+                    ->orWhere('harga_bulanan', 'like', '%' . $cariKost . '%')
+                    ->orWhere('harga_tahunan', 'like', '%' . $cariKost . '%')
+                    ->orWhere('fasilitas', 'like', '%' . $cariKost . '%');
             });
         }
 

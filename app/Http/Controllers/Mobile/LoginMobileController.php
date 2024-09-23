@@ -56,10 +56,10 @@ class LoginMobileController extends Controller
                 $user->save();
 
                 // Kirim OTP ke email user
-                Mail::send('emails.otp', ['otp' => $otpCode], function ($message) use ($user) {
-                    $message->to($user->email);
-                    $message->subject('Kode OTP Anda');
-                });
+                // Mail::send('emails.otp', ['otp' => $otpCode], function ($message) use ($user) {
+                //     $message->to($user->email);
+                //     $message->subject('Kode OTP Anda');
+                // });
 
                 // Logout user sementara sampai OTP diverifikasi
                 Auth::logout();

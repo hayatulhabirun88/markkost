@@ -40,7 +40,10 @@ class DatakostController extends Controller
             "user_id" => "required|numeric",
             "nama_kost" => "required",
             "no_telp" => "required",
-            "harga" => "required|numeric",
+            "harga_harian" => "required|numeric",
+            "harga_mingguan" => "required|numeric",
+            "harga_bulanan" => "required|numeric",
+            "harga_tahunan" => "required|numeric",
             "fasilitas" => "required",
             "maps" => "required",
             "alamat" => "required",
@@ -48,6 +51,32 @@ class DatakostController extends Controller
             "gambar" => "required|image|mimes:gif,png,jpg,jpeg",
             "gambar_detail.*" => "required|image|mimes:gif,png,jpg,jpeg",
             "video" => "required|string",
+        ], [
+            "user_id.required" => "ID pengguna harus diisi.",
+            "user_id.numeric" => "ID pengguna harus berupa angka.",
+            "nama_pemilik.required" => "Nama pemilik harus diisi.",
+            "nama_kost.required" => "Nama kost harus diisi.",
+            "no_telp.required" => "Nomor telepon harus diisi.",
+            "harga_harian.required" => "Harga harian harus diisi.",
+            "harga_harian.numeric" => "Harga harian harus berupa angka.",
+            "harga_mingguan.required" => "Harga mingguan harus diisi.",
+            "harga_mingguan.numeric" => "Harga mingguan harus berupa angka.",
+            "harga_bulanan.required" => "Harga bulanan harus diisi.",
+            "harga_bulanan.numeric" => "Harga bulanan harus berupa angka.",
+            "harga_tahunan.required" => "Harga tahunan harus diisi.",
+            "harga_tahunan.numeric" => "Harga tahunan harus berupa angka.",
+            "fasilitas.required" => "Fasilitas harus diisi.",
+            "maps.required" => "Maps harus diisi.",
+            "alamat.required" => "Alamat harus diisi.",
+            "keterangan.required" => "Keterangan harus diisi.",
+            "gambar.required" => "Gambar harus diunggah.",
+            "gambar.image" => "File yang diunggah harus berupa gambar.",
+            "gambar.mimes" => "Gambar harus dalam format: gif, png, jpg, jpeg.",
+            "gambar_detail.*.required" => "Gambar detail harus diunggah.",
+            "gambar_detail.*.image" => "File gambar detail harus berupa gambar.",
+            "gambar_detail.*.mimes" => "Gambar detail harus dalam format: gif, png, jpg, jpeg.",
+            "video.required" => "Video harus diisi.",
+            "video.string" => "Video harus berupa string.",
         ]);
 
         if ($request->file('gambar')) {
@@ -63,7 +92,10 @@ class DatakostController extends Controller
             "user_id" => $request->user_id,
             "nama_kost" => $request->nama_kost,
             "no_telp" => $request->no_telp,
-            "harga" => $request->harga,
+            "harga_harian" => $request->harga_harian,
+            "harga_mingguan" => $request->harga_mingguan,
+            "harga_bulanan" => $request->harga_bulanan,
+            "harga_tahunan" => $request->harga_tahunan,
             "fasilitas" => $request->fasilitas,
             "maps" => $request->maps,
             "alamat" => $request->alamat,
@@ -116,13 +148,37 @@ class DatakostController extends Controller
             "nama_pemilik" => "required|numeric",
             "nama_kost" => "required",
             "no_telp" => "required",
-            "harga" => "required|numeric",
+            "harga_harian" => "required|numeric",
+            "harga_mingguan" => "required|numeric",
+            "harga_bulanan" => "required|numeric",
+            "harga_tahunan" => "required|numeric",
             "fasilitas" => "required",
             "maps" => "required",
             "alamat" => "required",
             "keterangan" => "required",
             "gambar" => "image|mimes:gif,png,jpg,jpeg",
             "gambar_detail.*" => "image|mimes:gif,png,jpg,jpeg",
+        ], [
+            "nama_pemilik.required" => "Nama pemilik harus diisi.",
+            "nama_pemilik.numeric" => "Nama pemilik harus berupa angka.",
+            "nama_kost.required" => "Nama kost harus diisi.",
+            "no_telp.required" => "Nomor telepon harus diisi.",
+            "harga_harian.required" => "Harga harian harus diisi.",
+            "harga_harian.numeric" => "Harga harian harus berupa angka.",
+            "harga_mingguan.required" => "Harga mingguan harus diisi.",
+            "harga_mingguan.numeric" => "Harga mingguan harus berupa angka.",
+            "harga_bulanan.required" => "Harga bulanan harus diisi.",
+            "harga_bulanan.numeric" => "Harga bulanan harus berupa angka.",
+            "harga_tahunan.required" => "Harga tahunan harus diisi.",
+            "harga_tahunan.numeric" => "Harga tahunan harus berupa angka.",
+            "fasilitas.required" => "Fasilitas harus diisi.",
+            "maps.required" => "Maps harus diisi.",
+            "alamat.required" => "Alamat harus diisi.",
+            "keterangan.required" => "Keterangan harus diisi.",
+            "gambar.image" => "File yang diunggah harus berupa gambar.",
+            "gambar.mimes" => "Gambar harus dalam format: gif, png, jpg, jpeg.",
+            "gambar_detail.*.image" => "File gambar detail harus berupa gambar.",
+            "gambar_detail.*.mimes" => "Gambar detail harus dalam format: gif, png, jpg, jpeg.",
         ]);
 
         if ($request->file('gambar')) {
@@ -156,7 +212,10 @@ class DatakostController extends Controller
         $datakost->user_id = $request->nama_pemilik;
         $datakost->nama_kost = $request->nama_kost;
         $datakost->no_telp = $request->no_telp;
-        $datakost->harga = $request->harga;
+        $datakost->harga_harian = $request->harga_harian;
+        $datakost->harga_mingguan = $request->harga_mingguan;
+        $datakost->harga_bulanan = $request->harga_bulanan;
+        $datakost->harga_tahunan = $request->harga_tahunan;
         $datakost->fasilitas = $request->fasilitas;
         $datakost->maps = $request->maps;
         $datakost->alamat = $request->alamat;

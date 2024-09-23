@@ -120,7 +120,7 @@ Route::get('/mobile/index', function () {
 Route::get('/mobile/dashboard', [HomeMobileController::class, 'index'])->name('mobile.home');
 Route::get('/mobile/cari', [HomeMobileController::class, 'cari'])->name('mobile.cari');
 Route::get('/mobile/detail/{id}', [HomeMobileController::class, 'show'])->name('mobile.detail');
-Route::get('/mobile/booking/{id}', [BookingMobileController::class, 'show'])->name('mobile.booking');
+Route::get('/mobile/booking/{id}/{harga}', [BookingMobileController::class, 'show'])->name('mobile.booking');
 Route::post('/mobile/booking/', [BookingMobileController::class, 'store'])->name('mobile.store');
 Route::post('/mobile/booking/getajax', [BookingMobileController::class, 'ajaxrekening'])->name('mobile.ajaxrekening');
 Route::get('/mobile/pembayaran/{id}', [PembayaranMobileController::class, 'show'])->name('mobile.pembayaran.show');

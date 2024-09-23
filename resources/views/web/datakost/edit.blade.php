@@ -77,10 +77,18 @@
                                     name="no_telp" id="no_telp" placeholder="No Telp" />
                             </div>
                             <div class="mb-3">
-                                <label for="harga" class="form-label">Harga</label>
-                                <input type="text" class="form-control" value="{{ old('harga', $datakost->harga) }}"
-                                    name="harga" id="harga" placeholder="Harga" />
+                                <label for="harga_harian" class="form-label">Harga Harian</label>
+                                <input type="text" class="form-control"
+                                    value="{{ old('harga_harian', $datakost->harga_harian) }}" name="harga_harian"
+                                    id="harga_harian" placeholder="Harga Harian" />
                             </div>
+                            <div class="mb-3">
+                                <label for="harga_mingguan" class="form-label">Harga Mingguan</label>
+                                <input type="text" class="form-control"
+                                    value="{{ old('harga_mingguan', $datakost->harga_mingguan) }}" name="harga_mingguan"
+                                    id="harga_mingguan" placeholder="Harga Mingguan" />
+                            </div>
+
                             <div class="mb-3">
                                 <label for="video" class="form-label">Video</label>
                                 <input type="text" class="form-control" value="{{ old('video', $datakost->video) }}"
@@ -115,7 +123,8 @@
                                             <div class="modal-dialog">
                                                 <div class="modal-content">
                                                     <div class="modal-header">
-                                                        <h5 class="modal-title" id="lihatGambarUtamaLabel">Gambar Utama</h5>
+                                                        <h5 class="modal-title" id="lihatGambarUtamaLabel">Gambar Utama
+                                                        </h5>
                                                         <button type="button" class="btn-close" data-bs-dismiss="modal"
                                                             aria-label="Close"></button>
                                                     </div>
@@ -184,6 +193,18 @@
                                 <input type="text" class="form-control" value="{{ old('maps', $datakost->maps) }}"
                                     name="maps" id="maps"
                                     placeholder="Titik Koordinat : -5.495970042412335, 122.56891822158305" readonly />
+                            </div>
+                            <div class="mb-3">
+                                <label for="harga_bulanan" class="form-label">Harga Bulanan</label>
+                                <input type="text" class="form-control"
+                                    value="{{ old('harga_bulanan', $datakost->harga_bulanan) }}" name="harga_bulanan"
+                                    id="harga_bulanan" placeholder="Harga Bulanan" />
+                            </div>
+                            <div class="mb-3">
+                                <label for="harga_tahunan" class="form-label">Harga Tahunan</label>
+                                <input type="text" class="form-control"
+                                    value="{{ old('harga_tahunan', $datakost->harga_tahunan) }}" name="harga_tahunan"
+                                    id="harga_tahunan" placeholder="Harga Tahunan" />
                             </div>
 
                             <div class="mb-3">

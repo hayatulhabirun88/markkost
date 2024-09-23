@@ -267,8 +267,8 @@
                                     <div class="mb-3">
                                         <label for="nominal" class="form-label">Nominal Pembayaran</label>
                                         <input type="text" name="nominal" placeholder="Nominal Pembayaran"
-                                            value="{{ number_format($datakost->harga) }}" class="form-control"
-                                            id="nominal" readonly>
+                                            value="{{ number_format($harga) }}" class="form-control" id="nominal"
+                                            readonly>
                                     </div>
                                 </div>
                                 <div class="card-action">

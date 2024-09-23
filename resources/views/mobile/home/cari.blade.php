@@ -267,7 +267,17 @@
                                                         <td>
                                                             <div class="title ">{{ $dtkost->nama_kost }}</div>
                                                             <div class="tagline ">
-                                                                Harga: Rp. {{ number_format($dtkost->harga) }} <br>
+                                                                Harian: Rp. {{ number_format($dtkost->harga_harian) }}
+                                                                <br>
+                                                                Mingguan: Rp.
+                                                                {{ number_format($dtkost->harga_mingguan) }}
+                                                                <br>
+                                                                Bulanan: Rp.
+                                                                {{ number_format($dtkost->harga_bulanan) }}
+                                                                <br>
+                                                                Tahunan: Rp.
+                                                                {{ number_format($dtkost->harga_tahunan) }}
+                                                                <br>
                                                                 Alamat: {{ $dtkost->alamat }}<br>
                                                                 No HP: {{ $dtkost->no_telp }}<br>
                                                                 Fasilitas: {{ $dtkost->fasilitas }}<br>

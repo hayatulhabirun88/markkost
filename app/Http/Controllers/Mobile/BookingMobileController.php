@@ -83,10 +83,20 @@ class BookingMobileController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(string $id)
+    public function show(string $id, $jenis_langganan)
     {
         $datakost = Datakost::findOrFail($id);
-        return view('mobile.booking.booking', compact(['datakost']));
+        if ($jenis_langganan == "harian") {
+            $harga = $datakost->harga_harian;
+        } elseif ($jenis_langganan == "mingguan") {
+            $harga = $datakost->harga_mingguan;
+        } elseif ($jenis_langganan == "bulanan") {
+            $harga = $datakost->harga_bulanan;
+        } elseif ($jenis_langganan == "tahunan") {
+            $harga = $datakost->harga_tahunan;
+        }
+
+        return view('mobile.booking.booking', compact(['datakost', 'harga']));
     }
 
     /**

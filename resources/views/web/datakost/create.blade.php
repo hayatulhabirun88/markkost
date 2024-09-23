@@ -55,40 +55,65 @@
                             <div class="mb-3">
                                 <label for="nama_pemilik" class="form-label">Nama Pemilik</label>
                                 <select class="form-select form-select" name="user_id" id="nama_pemilik">
-                                    <option value="" selected>-- Pilih Nama Pemilik --</option>
+                                    <option value="">-- Pilih Nama Pemilik --</option>
                                     @foreach ($nama_pemilik as $nmpemilik)
                                         <option value="{{ $nmpemilik->id }}"
-                                            {{ $nmpemilik->id == old('nama_pemilik') ? 'selected' : '' }}>
+                                            {{ $nmpemilik->id == old('user_id') ? 'selected' : '' }}>
                                             {{ $nmpemilik->name }}
                                         </option>
                                     @endforeach
                                 </select>
-                                @error('record')
+                                @error('user_id')
+                                    <span class="text-danger">{{ $message }}</span>
                                 @enderror
                             </div>
                             <div class="mb-3">
                                 <label for="nama_kost" class="form-label">Nama Kost</label>
                                 <input type="text" class="form-control" value="{{ old('nama_kost') }}" name="nama_kost"
                                     id="nama_kost" placeholder="Nama Kost" />
+                                @error('nama_kost')
+                                    <span class="text-danger">{{ $message }}</span>
+                                @enderror
                             </div>
                             <div class="mb-3">
                                 <label for="no_telp" class="form-label">No Telp</label>
                                 <input type="text" value="{{ old('no_telp') }}" class="form-control" name="no_telp"
                                     id="no_telp" placeholder="No Telp" />
+                                @error('no_telp')
+                                    <span class="text-danger">{{ $message }}</span>
+                                @enderror
                             </div>
                             <div class="mb-3">
-                                <label for="harga" class="form-label">Harga</label>
-                                <input type="text" class="form-control" name="harga" id="harga"
-                                    placeholder="Harga" />
+                                <label for="harga_harian" class="form-label">Harga Harian</label>
+                                <input type="text" class="form-control" name="harga_harian" id="harga_harian"
+                                    placeholder="Harga Harian" />
+                                @error('harga_harian')
+                                    <span class="text-danger">{{ $message }}</span>
+                                @enderror
                             </div>
+                            <div class="mb-3">
+                                <label for="harga_mingguan" class="form-label">Harga Mingguan</label>
+                                <input type="text" class="form-control" name="harga_mingguan" id="harga_mingguan"
+                                    placeholder="Harga Mingguan" />
+                                @error('harga_mingguan')
+                                    <span class="text-danger">{{ $message }}</span>
+                                @enderror
+                            </div>
+
                             <div class="mb-3">
                                 <label for="video" class="form-label">Video</label>
                                 <input type="text" class="form-control" value="{{ old('video') }}" name="video"
                                     id="video" placeholder="Contoh: https://www.youtube.com/watch?v=ldVdNgkE2Yo" />
+                                @error('video')
+                                    <span class="text-danger">{{ $message }}</span>
+                                @enderror
                             </div>
                             <div class="mb-3">
                                 <label for="fasilitas" class="form-label">Fasilitas</label>
                                 <textarea class="form-control" name="fasilitas" value="{{ old('fasilitas') }}" id="fasilitas" rows="3"></textarea>
+                                @error('fasilitas')
+                                    <span class="text-danger">{{ $message }}</span>
+                                @enderror
                             </div>
                         </div>
                         <div class="col-md-6">
@@ -96,11 +121,17 @@
                                 <label for="gambar" class="form-label">Gambar</label>
                                 <input type="file" class="form-control" value="{{ old('gambar') }}" name="gambar"
                                     id="gambar" placeholder="Gambar" />
+                                @error('gambar')
+                                    <span class="text-danger">{{ $message }}</span>
+                                @enderror
                             </div>
                             <div class="mb-3">
                                 <label for="gambar_detail" class="form-label">Gambar Detail</label>
                                 <input type="file" class="form-control" value="{{ old('gambar_detail') }}"
                                     name="gambar_detail[]" id="gambar_detail[]" placeholder="Gambar Detail" multiple />
+                                @error('gambar_detail')
+                                    <span class="text-danger">{{ $message }}</span>
+                                @enderror
                             </div>
                             <div class="mb-3">
                                 <label for="maps" class="form-label">Titik Koordinat <span class="badge bg-danger">
@@ -110,15 +141,40 @@
                                 <input type="text" class="form-control" value="{{ old('maps') }}" name="maps"
                                     id="maps" placeholder="Titik Koordinat : -5.495970042412335, 122.56891822158305"
                                     readonly />
+                                @error('maps')
+                                    <span class="text-danger">{{ $message }}</span>
+                                @enderror
+                            </div>
+                            <div class="mb-3">
+                                <label for="harga_bulanan" class="form-label">Harga Bulanan</label>
+                                <input type="text" class="form-control" name="harga_bulanan" id="harga_bulanan"
+                                    placeholder="Harga Bulanan" />
+                                @error('harga_bulanan')
+                                    <span class="text-danger">{{ $message }}</span>
+                                @enderror
+                            </div>
+                            <div class="mb-3">
+                                <label for="harga_tahunan" class="form-label">Harga Tahunan</label>
+                                <input type="text" class="form-control" name="harga_tahunan" id="harga_tahunan"
+                                    placeholder="Harga Tahunan" />
+                                @error('harga_tahunan')
+                                    <span class="text-danger">{{ $message }}</span>
+                                @enderror
                             </div>
 
                             <div class="mb-3">
                                 <label for="alamat" class="form-label">Alamat</label>
                                 <textarea class="form-control" name="alamat" id="alamat" rows="3">{{ old('alamat') }}</textarea>
+                                @error('alamat')
+                                    <span class="text-danger">{{ $message }}</span>
+                                @enderror
                             </div>
                             <div class="mb-3">
                                 <label for="keterangan" class="form-label">Keterangan</label>
                                 <textarea class="form-control" name="keterangan" value="{{ old('keterangan') }}" id="keterangan" rows="3"></textarea>
+                                @error('keterangan')
+                                    <span class="text-danger">{{ $message }}</span>
+                                @enderror
                             </div>
                         </div>
                         <div id="map" style="height: 300px;"></div>

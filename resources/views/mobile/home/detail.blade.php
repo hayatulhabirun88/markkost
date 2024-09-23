@@ -254,15 +254,35 @@
                                 <div class="icon-block block-small circle">
                                     <table>
                                         <tbody>
+                                            <form id="bookingForm" method="get">
+                                                <input type="hidden" name="id_kost" value="{{ $datakost->id }}">
+                                                <tr>
+                                                    <td colspan="2">
+                                                        <div class="text-center">
+                                                            <button type="button" id="bookingButton"
+                                                                class="btn btn-primary">Booking</button>
+                                                        </div>
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td>
+                                                        <select name="kategori" id="kategori"
+                                                            style="text-align: left;">
+                                                            <option value="harian">Harian
+                                                            </option>
+                                                            <option value="mingguan">Mingguan
+                                                            </option>
+                                                            <option value="bulanan">Bulanan
+                                                            </option>
+                                                            <option value="tahunan">Tahunan
+                                                            </option>
+                                                        </select>
+                                                    </td>
+                                                </tr>
+                                            </form>
                                             <tr>
-
                                                 <td colspan="2">
-                                                    <div
-                                                        style="width:150px;background-color:rgb(172, 208, 235) !important; padding:5px;border-radius:20px;text-align:center;display:inline-block;font-size:20px;font-weight:bold;color:green;">
-                                                        Rp.
-                                                        {{ number_format($datakost->harga) }}</div> <a
-                                                        href="/mobile/booking/{{ $datakost->id }}"
-                                                        class="btn btn-primary" style="float: right;">Booking</a>
+                                                    <div id="harga"></div>
                                                 </td>
                                             </tr>
                                             <tr>
@@ -340,7 +360,7 @@
 
 
             </div>
-        </div>
+        </div><br>
 
 
         <footer class="page-footer center social-colored ">
@@ -437,6 +457,80 @@
                 .openOn(map);
 
 
+        });
+    </script>
+
+    <script>
+        $(document).ready(function() {
+            let harga_harian = `{{ $datakost->harga_harian }}`;
+            let harga_mingguan = `{{ $datakost->harga_mingguan }}`;
+            let harga_bulanan = `{{ $datakost->harga_bulanan }}`;
+            let harga_tahunan = `{{ $datakost->harga_tahunan }}`;
+
+            $("#harga").html(`
+                        <div style="display: flex; justify-content: center;">
+                            <div class="btn btn-info"
+                                style="background-color:rgb(98, 200, 255); font-size:15px;">
+                                Rp. ${harga_harian} / hari
+                            </div>
+                        </div>
+                    `);
+
+            $("#kategori").change(function(e) {
+                e.preventDefault();
+                let kategori = $("#kategori").val();
+
+                if (kategori == "harian") {
+                    $("#harga").html(`
+                        <div style="display: flex; justify-content: center;">
+                            <div class="btn btn-info"
+                                style="background-color:rgb(98, 200, 255); font-size:15px;">
+                                Rp. ${harga_harian} / harian
+                            </div>
+                        </div>
+                    `);
+                } else if (kategori == "mingguan") {
+                    $("#harga").html(`
+                        <div style="display: flex; justify-content: center;">
+                            <div class="btn btn-info"
+                                style="background-color:rgb(98, 200, 255); font-size:15px;">
+                                Rp. ${harga_mingguan} / minggu
+                            </div>
+                        </div>
+                    `);
+                } else if (kategori == "bulanan") {
+                    $("#harga").html(`
+                        <div style="display: flex; justify-content: center;">
+                            <div class="btn btn-info"
+                                style="background-color:rgb(98, 200, 255); font-size:15px;">
+                                Rp. ${harga_bulanan} / bulan
+                            </div>
+                        </div>
+                    `);
+                } else {
+                    $("#harga").html(`
+                        <div style="display: flex; justify-content: center;">
+                            <div class="btn btn-info"
+                                style="background-color:rgb(98, 200, 255); font-size:15px;">
+                                Rp. ${harga_tahunan} / tahun
+                            </div>
+                        </div>
+                    `);
+                }
+
+            });
+
+
+            $('#bookingButton').click(function() {
+                // Ambil nilai id_kost
+                var id = $('input[name="id_kost"]').val();
+
+                // Ambil harga berdasarkan kategori yang dipilih
+                var harga = $('#kategori').val();
+
+                // Redirect ke URL yang sesuai
+                window.location.href = `/mobile/booking/${id}/${harga}`;
+            });
         });
     </script>
 </body>
